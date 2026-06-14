@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Wanna Be Yours</title><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&display=swap" rel="stylesheet"><style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:
+    radial-gradient(circle at 20% 20%,
+    rgba(70,90,180,.12),
+    transparent 25%),
+
+    radial-gradient(circle at 80% 80%,
+    rgba(90,120,255,.08),
+    transparent 25%),
+
+    radial-gradient(circle at center,
+    #07111f 0%,
+    #03060d 60%,
+    #000 100%);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* BINTANG */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    50%{
+        opacity:.2;
+        transform:scale(.7);
+    }
+}
+
+/* KONTEN */
+.content{
+    position:relative;
+    z-index:20;
+    text-align:center;
+}
+
+.lyric{
+    font-family:'Cinzel',serif;
+    color:#f6e8c8;
+    font-size:2,3rem;
+    letter-spacing:4px;
+    text-shadow:
+        0 0 10px rgba(246,232,200,.4),
+        0 0 20px rgba(246,232,200,.2);
+    opacity:0;
+    animation:fadeIn 2s forwards;
+}
+
+.spark{
+    margin-top:25px;
+    color:#f6e8c8;
+    font-size:1.3rem;
+    opacity:0;
+    animation:fadeIn 2s forwards;
+    animation-delay:.8s;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.fade-out{
+    animation:fadeOut 2s forwards;
+}
+
+@keyframes fadeOut{
+    to{
+        opacity:0;
+    }
+}
+.moon{
+    position:absolute;
+
+    top:80px;
+    right:100px;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    background:#fff6d5;
+
+    box-shadow:
+        0 0 20px rgba(255,246,213,.7),
+        0 0 50px rgba(255,246,213,.4);
+
+    z-index:2;
+}
+
+.shooting-star{
+    position:absolute;
+
+    width:120px;
+    height:2px;
+
+    background:
+    linear-gradient(to right,
+    transparent,white);
+
+    opacity:0;
+
+    transform:rotate(25deg);
+
+    animation:shoot 3s linear forwards,fadeStar 3s linear forwards;
+
+    z-index:1;
+}
+@keyframes fadeStar{
+
+    0%{
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+@keyframes shoot{
+
+    from{
+        transform:
+        translateX(0)
+        translateY(0)
+        rotate(25deg);
+    }
+
+    to{
+        transform:
+        translateX(1200px)
+        translateY(500px)
+        rotate(25deg);
+    }
+}
+</style></head>
+<body>
+<div id = "shooting-container"></div>
+<div class="ground"></div>
+<div class="grass"></div>
+<div class="moon"></div>
+    
+    <div class="stars"></div><div class="content"><div class="lyric" id="text">
+    I wanna be yours.
+</div>
+
+<div class="spark">✦</div>
+
+</div>
+<audio id="bgMusic" autoplay>
+    <source src="wannabeyours.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* GENERATE BINTANG */
+const stars = document.querySelector('.stars');
+
+for(let i=0;i<300;i++){
+
+    const star = document.createElement('span');
+
+    star.classList.add('star');
+
+    const size = Math.random()*3;
+
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    star.style.left = Math.random()*100 + '%';
+    star.style.top = Math.random()*100 + '%';
+
+    star.style.opacity = Math.random();
+
+    star.style.animationDelay =
+    Math.random()*5 + 's';
+
+    stars.appendChild(star);
+}
+
+/* GANTI TEKS */
+const text = document.getElementById('text');
+
+const lyrics = [
+    { text: ".....", time: 0.0 },
+    { text: "I wanna be yours.", time: 5.3 },
+    { text: "If you like your coffee hot", time: 9.0 },
+    { text: "Let me be your coffee pot", time: 12.4 },
+    { text: "You call the shots, babe", time: 16.0 },
+    { text: "I just wanna be yours", time: 18.5 },
+    { text: "Secrets I have held in my heart", time: 23.0 },
+    { text: "My heart hide than I thought", time: 26.0 },
+    { text: "Maybe I just wanna be yours", time: 30.0 },
+    { text: "I wanna be yours", time: 33.0 },
+    { text: "I wanna be yours", time: 33.0 },
+];
+
+const audio = document.getElementById("bgMusic");
+
+audio.addEventListener("timeupdate", () => {
+
+    const current = audio.currentTime;
+
+    lyrics.forEach((line, index) => {
+
+        if (
+            current >= line.time &&
+            (index === lyrics.length - 1 ||
+             current < lyrics[index + 1].time)
+        ) {
+
+            if (text.innerHTML !== line.text) {
+
+                text.classList.add("fade-out");
+
+                setTimeout(() => {
+
+                    text.innerHTML = line.text;
+
+                    text.classList.remove("fade-out");
+
+                    void text.offsetWidth;
+
+                    text.style.animation =
+                    "fadeIn 2s forwards";
+
+                }, 300);
+
+            }
+        }
+
+    });
+
+});
+
+function createShootingStar(){
+
+    const star = document.createElement("div");
+    star.classList.add("shooting-star");
+
+    star.style.top =
+    Math.random() * 50 + "%";
+
+    star.style.left =
+    Math.random() * 30 + "%";
+
+    star.style.transform =
+    `rotate(${20 + Math.random()*20}deg)`;
+
+    document.body.appendChild(star);
+
+    setTimeout(() => {
+        star.remove();
+    }, 3000);
+}
+
+function starShootingStars(){ 
+
+    createShootingStar();
+    const nextTime = 5000+Math.random()*1000
+    setTimeout(starShootingStars,nextTime)
+}
+starShootingStars();
+</script></body>
+</html>
