@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iwannabeyoursgibran</title><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at 20% 20%,
+    rgba(70,90,180,.12),
+    transparent 25%),
+
+    radial-gradient(circle at 80% 80%,
+    rgba(90,120,255,.10),
+    transparent 25%),
+
+    radial-gradient(circle at center,
+    #07111f 0%,
+    #03060d 50%,
+    #000000 100%);
+
+    color:white;
+    position:relative;
+}
+
+/* BINTANG */
+.stars{
+position:absolute;
+width:100%;
+height:100%;
+overflow: hidden;
+}
+
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+animation:twinkle 4s infinite ease-in-out;
+}
+
+.star.small{
+width:2px;
+height:2px;
+opacity:.5;
+}
+
+.star.big{
+width:4px;
+height:4px;
+box-shadow:
+0 0 10px white,
+0 0 20px white;
+}
+
+@keyframes twinkle{
+50%{
+opacity:.2;
+transform:scale(.8);
+}
+}
+
+/* KONTEN */
+.container{
+text-align:center;
+z-index:10;
+padding:20px;
+}
+
+.line{
+    width:340px;
+    height:1px;
+
+    background:
+    linear-gradient(
+    to right,
+    transparent,
+    #f6e8c8,
+    transparent
+    );
+}
+
+.title{
+    font-family:'Cinzel',serif;
+    font-size:3.2rem;
+    letter-spacing:14px;
+    font-weight:400;
+
+    color:#f6e8c8;
+
+    text-shadow:
+    0 0 10px rgba(255,220,180,.25),
+    0 0 25px rgba(255,220,180,.15);
+}
+
+.spark{
+font-size:28px;
+color:#ffe6b0;
+margin:30px 0;
+animation:float 3s ease-in-out infinite;
+}
+
+.btn{
+    padding:14px 50px;
+    border:1px solid rgba(246,232,200,.6);
+
+    color:#f6e8c8;
+    text-decoration:none;
+
+    border-radius:8px;
+
+    letter-spacing:8px;
+
+    background:
+    rgba(255,255,255,.02);
+
+    transition:.4s;
+}
+
+.btn:hover{
+    box-shadow:
+    0 0 15px rgba(246,232,200,.25),
+    0 0 30px rgba(246,232,200,.15);
+
+    transform:translateY(-3px);
+}
+
+.btn:hover{
+transform:translateY(-4px);
+box-shadow:
+0 0 20px rgba(255,220,160,.4);
+}
+
+@keyframes float{
+50%{
+transform:translateY(-8px);
+}
+}
+</style></head>
+<body><div class="stars"><div class="star small" style="top:10%;left:15%"></div>
+<div class="star small" style="top:20%;left:70%"></div>
+<div class="star small" style="top:30%;left:40%"></div>
+<div class="star small" style="top:80%;left:20%"></div>
+<div class="star small" style="top:65%;left:85%"></div>
+<div class="star small" style="top:50%;left:10%"></div>
+<div class="star small" style="top:75%;left:60%"></div>
+<div class="star small" style="top:15%;left:90%"></div><div class="star big" style="top:18%;left:80%"></div>
+<div class="star big" style="top:72%;left:25%"></div>
+<div class="star big" style="top:85%;left:75%"></div></div><div class="container"><div class="line"></div><h1 class="title">
+I WANNA BE YOURS
+</h1><div class="line"></div><div class="spark">✦</div><a href="lirik.html" class="btn">
+ENTER
+</a></div>
+<script>
+const stars = document.querySelector('.stars');
+
+for(let i=0;i<300;i++){
+
+    const star = document.createElement('span');
+
+    star.classList.add('star');
+
+    const size = Math.random()*3;
+
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+
+    star.style.left = Math.random()*100+'%';
+    star.style.top = Math.random()*100+'%';
+
+    star.style.opacity = Math.random();
+
+    star.style.animationDelay =
+    Math.random()*5+'s';
+
+    stars.appendChild(star);
+}
+</script>
+</body>
+</html>
